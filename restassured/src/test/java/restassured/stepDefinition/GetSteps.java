@@ -8,6 +8,10 @@ public class GetSteps {
 
     private String cep;
     private GetHelper getHelper;
+    private String logradouro;
+    private String bairro;
+    private String uf;
+    private String localidade;
 
     public GetSteps(GetHelper getHelper) {
         this.getHelper = getHelper;
@@ -30,4 +34,73 @@ public class GetSteps {
         this.getHelper.validateResponseCorreios();
     }
 
+    @Dado("^que ao consultar o logradouro \"([^\"]*)\"$")
+    public void queAoConsultarOLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+        System.out.println(logradouro);
+    }
+
+    @Quando("^realizo uma pesquisa informando um campo$")
+    public void realizoUmaPesquisaInformandoUmCampo() {
+        String url = "https://viacep.com.br/ws/" +logradouro+ "/json/";
+        this.getHelper.callGetLogradouro(url);
+    }
+
+    @Então("^recebo o valor do campo que está preenchido$")
+    public void receboOValorDoCampoQueEstáPreenchido() {
+        this.getHelper.campoIsNotEmpty();
+    }
+
+    @Dado("^que ao consultar o bairro \"([^\"]*)\"$")
+    public void queAoConsultarOBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    @Quando("^realizo uma pesquisa informando o bairro$")
+    public void realizoUmaPesquisaInformandoOBairro() {
+        String url = "https://viacep.com.br/ws/" +bairro+ "/json/";
+        this.getHelper.callGetBairro(url);
+    }
+
+    @Então("^recebo o valor do bairro$")
+    public void receboOValorDoBairro() {
+        this.getHelper.campoIsNotEmpty();
+    }
+
+    @Dado("^que ao consultar a cidade \"([^\"]*)\"$")
+    public void queAoConsultarACidade(String cidade){
+        this.localidade = cidade;
+    }
+
+    @Quando("^realizo uma pesquisa informando a cidade$")
+    public void realizoUmaPesquisaInformandoACidade() {
+        String url = "https://viacep.com.br/ws/" + localidade + "/json/";
+        this.getHelper.callGetCidade(url);
+    }
+
+    @Então("^recebo o valor da cidade$")
+    public void receboOValorDaCidade() {
+        this.getHelper.campoIsNotEmpty();
+    }
+
+    @Dado("^que ao consultar o uf \"([^\"]*)\"$")
+    public void queAoConsultarOUf(String uf){
+        this.uf = uf;
+    }
+
+    @Quando("^realizo uma pesquisa informando o uf$")
+    public void realizoUmaPesquisaInformandoOUf() {
+        String url = "https://viacep.com.br/ws/" +uf+ "/json/";
+        this.getHelper.callGetUf(url);
+    }
+
+    @Então("^recebo o valor da uf$")
+    public void receboOValorDaUf() {
+        this.getHelper.campoIsNotEmpty();
+    }
+
+    @Então("^imprima todos os campos passados$")
+    public void imprimaTodosOsCamposPassados() {
+        System.out.println(logradouro);
+    }
 }
