@@ -56,14 +56,6 @@
       <version>3.1.1</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.16</version>
-      <scope>provided</scope>
-    </dependency>
-
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>json-path</artifactId>
